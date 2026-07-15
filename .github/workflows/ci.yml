@@ -1,5 +1,18 @@
 name: CI
-on: [push, pull_request]
+on:
+  push:
+    tags-ignore:
+      - '**'
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   test:
