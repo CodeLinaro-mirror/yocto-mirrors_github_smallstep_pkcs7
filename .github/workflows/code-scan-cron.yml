@@ -12,3 +12,6 @@ jobs:
       security-events: write
     uses: smallstep/workflows/.github/workflows/code-scan.yml@main
     secrets: inherit
+    with:
+      codeql-build-mode: manual # tell codeql we'll build; skips autobuild's Makefile heuristic
+      codeql-build-cmd: go build ./...
